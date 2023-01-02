@@ -2,8 +2,11 @@ package com.contactmanager.Configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,7 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 
 @Configuration
-@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MyConfig {
 
 	@Bean
@@ -28,17 +31,41 @@ public class MyConfig {
 		
 		return new BCryptPasswordEncoder();
 	} 
-	@SuppressWarnings("deprecation")
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	        
 		 
-		 http.authorizeRequests().requestMatchers("/admin/**").hasRole("ADMIN")
-			.requestMatchers("/user/**").hasRole("USER")
-			.requestMatchers("/**").permitAll().and().formLogin().and().csrf().disable();
+		 http.authorizeHttpRequests(auth -> {auth.requestMatchers("/admin/").hasRole("ADMIN");
+				auth.requestMatchers("/user/").hasRole("USER");
+				auth.requestMatchers("/**").permitAll();
+				
+				})
+			.formLogin().loginPage("/signin")
+			.loginProcessingUrl("/post-signin").defaultSuccessUrl("/user/index")
+			.and().csrf().disable();
+		 
+		 http.authenticationProvider(authenticationProvider());
 		 
 	        return http.build();
 	    }
+
+	/*
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	        
+		 
+		 http.authorizeHttpRequests().requestMatchers("/admin/").hasRole("ADMIN")
+			.requestMatchers("/user/").hasRole("USER")
+			.requestMatchers("/**").permitAll().and().formLogin().loginPage("/signin")
+			.loginProcessingUrl("/post-signin").defaultSuccessUrl("/user/index")
+			.and().csrf().disable();
+		 
+		 http.authenticationProvider(authenticationProvider());
+		 
+	        return http.build();
+	    }
+	    
+	    */
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		
@@ -49,9 +76,10 @@ public class MyConfig {
 		return daoAuthenticationProvider;
 	}
 	
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+			
+		return authenticationConfiguration.getAuthenticationManager();
 		
-		auth.authenticationProvider(authenticationProvider());				
 	}	
 
 }

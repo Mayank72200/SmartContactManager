@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::Layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+
+<title>User Dashboard </title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<section >
+	
+		<div class="card mr-4 ml-3">
+		
+			<div class="card-body" th:if="${contact}">
+			
+				<div class="container text-center">
+				
+					<img style="height:200px; width:200px" class="profilePic"  th:src="@{'/img/'+${contact.imageURl}}">
+					
+					<h2 class="mt-3"> <span th:text="${contact.name}"></span>( <span th:text="${contact.nickname}" ></span>  )  </h2>
+
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">#ID</th>
+								<th scope="col"><span th:text="${contact.cid}"></span></th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th scope="row">Email</th>
+								<td><span th:text="${contact.email}"></span></td>
+								
+							</tr>
+							<tr>
+								<th scope="row">Phone</th>
+								<td><span th:text="${contact.phone}"></span></td>
+								
+							</tr>
+							<tr>
+								<th scope="row">Work</th>
+								<td><span th:text="${contact.work}"></span></td>
+								
+							</tr>
+							
+							
+							
+						</tbody>
+					</table>
+					
+					<div class="description mt-3">
+					
+					<h3 class="text-center mt2">Description</h3>
+					
+					<th:block th:utext="${contact.description}"> </th:block>
+			
+					</div>
+					
+					<div class="container mt-4">
+					
+					<a href="#" th:onclick="|deleteContact('${contact.cid}')|" class="btn btn-block btn-danger btn-sm mr-4">Delete</a>
+					
+					
+					<form  method="post" th:action="@{'/user/updateForm/'+${contact.cid}}">
+							
+							<button class="btn btn-block btn-primary btn-sm mt-2" type="submit">Update</button>
+							
+							</form>
+							
+					
+					</div>
+
+
+
+				</div>
+			
+			
+			</div>
+		
+		<h1 th:unless="${contact}"> You Don't have Permission to see this Contact !!</h1>
+		
+		</div>
+
+				
+
+
+
+	</section>
+</body>
+</html>

@@ -23,3 +23,171 @@ body{
 	padding:20px;
 	background:white;
 }
+
+/* CSS of  Login Page*/
+.main-head{
+    height: 150px;
+    background: #FFF;
+   
+}
+
+.sidenav {
+    height: 100%;
+    background-color: #000;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+
+.main {
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+}
+
+@media screen and (max-width: 450px) {
+    .login-form{
+        margin-top: 10%;
+    }
+
+    .register-form{
+        margin-top: 10%;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .main{
+        margin-left: 40%; 
+    }
+
+    .sidenav{
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    .login-form{
+        margin-top: 80%;
+    }
+
+    .register-form{
+        margin-top: 20%;
+    }
+}
+
+
+.login-main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+}
+
+.login-main-text h2{
+    font-weight: 300;
+}
+
+.btn-black{
+    background-color: #000 !important;
+    color: #fff;
+}
+
+/* CSS of  User Dsshboard Sidebar */
+
+@media only screen and (max-width: 600px){
+	
+	.sidebar{
+		display:none;
+		width: 80% !important;
+		 background: white;
+		 height: 100vh;
+		 position: fixed;
+		 padding-top:20px;
+		
+	}
+	.content{
+		margin-left: 0% !important;
+	
+	}
+	
+}
+
+.sidebar{
+	
+	width: 18%;
+	background: white;
+	height: 100%;
+	position: fixed;
+	padding-top:45px;
+	z-index:99999999999;
+	
+	
+}
+.content{
+	
+	margin-left: 20%;
+	
+	
+	
+}
+
+.sidebar a{
+	
+	display: block;
+	width: 100%;
+	padding:10px 25px;
+	text-decoration: none;
+	color: gray;
+	
+}
+
+.sidebar a:hover{
+	background: #e2e2e2;
+}
+
+.sidebar .divider{
+	height:.5px;
+	width:100%;
+	background: #e2e2e2;
+	margin-top: 10px;
+	
+}
+
+.cross_btn{
+	
+	position: absolute;
+	top:0px;
+	right:35px;
+	font-size:36px;
+	font-size:36px;
+	cursor: pointer;
+}
+
+
+.profilePic{
+	width:30px;
+	height:30px;
+	border-radius: 50%;
+	border:1px solid black;
+}
+.search-container{
+	
+	position:relative;
+	
+}
+.search-result{
+	
+	position:absolute;
+	background:white;
+	width:100%;
+	padding:10px;
+	display:none;
+	
+}
+
+
+
+

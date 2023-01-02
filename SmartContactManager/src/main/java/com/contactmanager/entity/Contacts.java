@@ -1,5 +1,7 @@
 package com.contactmanager.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,6 +28,7 @@ public class Contacts {
 	private String description;
 	
 	@ManyToOne
+	@JsonIgnore
 	private User user;
 	
 	
@@ -83,6 +86,14 @@ public class Contacts {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		return this.cid==((Contacts)obj).getCid();
+	}
+	
 
 	
 	

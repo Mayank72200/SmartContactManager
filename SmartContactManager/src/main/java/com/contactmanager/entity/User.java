@@ -35,7 +35,7 @@ public class User {
 	private String about;
 	private boolean  isenabled;
 	
-	@OneToMany(cascade = CascadeType.ALL , mappedBy = "user",fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL , mappedBy = "user",fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<Contacts> contacts = new ArrayList<>();
 
 	public int getUid() {
